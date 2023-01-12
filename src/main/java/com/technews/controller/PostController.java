@@ -66,5 +66,6 @@ public class PostController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost(@PathVariable int id) {
         repository.deleteById(id);
+
     }
 }

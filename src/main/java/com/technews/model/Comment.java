@@ -1,6 +1,5 @@
 package com.technews.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -15,15 +14,21 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String commentText;
+
+    private String userName;
     private Integer userId;
     private Integer postId;
 
+    public Comment() {
+    }
 
-    public Comment(Integer id, String commentText, Integer userId, Integer postId) {
+
+
+    public Comment(Integer id, String commentText, String userName, Integer userId, Integer postId) {
         this.id = id;
         this.commentText = commentText;
+        this.userName = userName;
         this.userId = userId;
         this.postId = postId;
     }
@@ -48,12 +53,22 @@ public class Comment implements Serializable {
         return userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+
+
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     public Integer getPostId() {
         return postId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setPostId(Integer postId) {
@@ -65,12 +80,12 @@ public class Comment implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id) && Objects.equals(commentText, comment.commentText) && Objects.equals(userId, comment.userId) && Objects.equals(postId, comment.postId);
+        return Objects.equals(id, comment.id) && Objects.equals(commentText, comment.commentText) && Objects.equals(userName, comment.userName) && Objects.equals(userId, comment.userId) && Objects.equals(postId, comment.postId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, commentText, userId, postId);
+        return Objects.hash(id, commentText, userName, userId, postId);
     }
 
     @Override
@@ -78,6 +93,7 @@ public class Comment implements Serializable {
         return "Comment{" +
                 "id=" + id +
                 ", commentText='" + commentText + '\'' +
+                ", userName='" + userName + '\'' +
                 ", userId=" + userId +
                 ", postId=" + postId +
                 '}';
